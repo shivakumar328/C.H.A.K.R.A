@@ -1,8 +1,8 @@
 <h1 align="center">CHAKRA</h1>
 
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&amp;height=180&amp;text=CHAKRA%20v2.0&amp;fontColor=00ff88&amp;color=0:030b06,50:041810,100:062518&amp;fontAlign=50&amp;fontAlignY=35&amp;desc=Cyber%20Heuristic%20Autonomous%20Kill-chain%20%26%20Recon%20Agent&amp;descAlign=50&amp;descAlignY=58" alt="CHAKRA Banner" />
-</p>
+![CHAKRA Banner](https://capsule-render.vercel.app/api?type=waving&height=180&section=header&text=CHAKRA%20v1.0&fontColor=00ff88&color=0:030b06,100:062518&fontAlign=50&fontAlignY=40)
+
+![CHAKRA Fallback Banner](https://img.shields.io/badge/CHAKRA-v1.0-00ff88?style=for-the-badge&labelColor=071510&color=00ff88)
 
 <p align="center">
   <a href="https://www.microsoft.com/windows"><img src="https://img.shields.io/badge/Windows-00ff88?style=for-the-badge&logo=windows&logoColor=black" alt="Windows" /></a>
