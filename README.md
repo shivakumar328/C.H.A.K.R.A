@@ -1,54 +1,57 @@
 # CHAKRA
 
-[![Platform](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white)](https://www.microsoft.com/windows)
-[![Backend](https://img.shields.io/badge/backend-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Frontend](https://img.shields.io/badge/frontend-React-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![LLM](https://img.shields.io/badge/LLM-Ollama-000000)](https://ollama.com/)
-[![DB](https://img.shields.io/badge/database-PostgreSQL-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+```text
+  _______ _    _          _  _______           
+ / ____| |  | |   /\   | |/ /  __ \   /\    
+| |    | |__| |  /  \  | ' /| |__) | /  \   
+| |    |  __  | / /\ \ |  < |  _  / / /\ \  
+| |____| |  | |/ ____ \| . \| | \ \/ ____ \ 
+ \_____|_|  |_/_/    \_\_|\_\_|  \_/_/    \_\
+```
 
-CHAKRA is a cyber operations dashboard with a FastAPI backend, WebSocket streaming, a React frontend, recon and scan agents, defense monitoring, and a pluggable tool registry.
+[![Platform](https://img.shields.io/badge/platform-Windows-00ff88?style=for-the-badge&logo=windows&logoColor=black)](https://www.microsoft.com/windows)
+[![Backend](https://img.shields.io/badge/backend-FastAPI-00c77a?style=for-the-badge&logo=fastapi&logoColor=black)](https://fastapi.tiangolo.com/)
+[![Frontend](https://img.shields.io/badge/frontend-React-39ff14?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![LLM](https://img.shields.io/badge/LLM-Ollama-0a0a0a?style=for-the-badge)](https://ollama.com/)
+[![DB](https://img.shields.io/badge/database-PostgreSQL-00ff88?style=for-the-badge&logo=postgresql&logoColor=black)](https://www.postgresql.org/)
 
-This project is intended for authorized security work only. Use it only on systems you own or have written permission to assess.
+> Terminal-Grade Cyber Ops Dashboard: FastAPI + WebSockets + React + Ollama + PostgreSQL
 
-## Quick Navigation
+CHAKRA is built for authorized security workflows only. Never run recon or scan activity against systems without explicit written permission.
 
-- [One-Command Path](#one-command-path)
-- [Full Interactive Setup](#full-interactive-setup)
-- [Downloads](#downloads)
-- [Project Structure](#project-structure)
-- [Start Backend and Frontend](#start-backend-and-frontend)
-- [Health and Verification](#health-and-verification)
+## Neural Console
+
+- [Quickstart in 90 Seconds](#quickstart-in-90-seconds)
+- [Downloads and Toolchain](#downloads-and-toolchain)
+- [Interactive Mission Setup](#interactive-mission-setup)
+- [Launch Sequence](#launch-sequence)
+- [Health and Integrity Checks](#health-and-integrity-checks)
+- [Plugin Arsenal Check](#plugin-arsenal-check)
+- [Project Topology](#project-topology)
 - [Troubleshooting](#troubleshooting)
 
-## One-Command Path
-
-If tools are already installed, use this fast path:
+## Quickstart in 90 Seconds
 
 ```powershell
-# from repo root
+# terminal 1 - project root
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install fastapi uvicorn psutil psycopg2-binary ollama
 ollama pull phi3:mini
-cd dashboard\frontend\chakra-ui
-npm install
-```
-
-Then start services in separate terminals:
-
-```powershell
-# terminal 1 (repo root)
 python run.py
 ```
 
 ```powershell
-# terminal 2 (frontend)
+# terminal 2 - frontend
 cd dashboard\frontend\chakra-ui
+npm install
 npm start
 ```
 
-## Downloads
+Open http://localhost:3000
+
+## Downloads and Toolchain
 
 ### Required
 
@@ -59,7 +62,7 @@ npm start
 - Ollama: https://ollama.com/download/windows
 - VS Code: https://code.visualstudio.com/Download
 
-### Optional Security Tools
+### Optional Recon and Security Tools
 
 - Nmap: https://nmap.org/download.html
 - Gobuster: https://github.com/OJ/gobuster/releases
@@ -67,22 +70,22 @@ npm start
 - Nikto: https://github.com/sullo/nikto
 - THC Hydra: https://github.com/vanhauser-thc/thc-hydra
 - TheHarvester: https://github.com/laramies/theHarvester
-- Whois: often easiest via WSL or package managers on Windows
+- Whois: easiest via WSL or a Windows package manager
 
-## Full Interactive Setup
+## Interactive Mission Setup
 
-Use the checklist below and expand each step as needed.
+Tick each checkpoint as you complete it.
 
-- [ ] Step 1: Install Ollama and verify
-- [ ] Step 2: Pull model
-- [ ] Step 3: Install Python and Node.js
-- [ ] Step 4: Install PostgreSQL and create DB
-- [ ] Step 5: Clone repo and install dependencies
-- [ ] Step 6: Configure settings
-- [ ] Step 7: Start backend and frontend
+- [ ] Install Ollama and verify CLI access
+- [ ] Pull model used by CHAKRA
+- [ ] Install Python + Node.js + PostgreSQL
+- [ ] Create PostgreSQL database and user
+- [ ] Clone repo and install backend/frontend dependencies
+- [ ] Configure settings.json
+- [ ] Start backend and frontend
 
 <details>
-<summary><strong>Step 1 - Install Ollama and verify</strong></summary>
+<summary><strong>Checkpoint 1 - Install Ollama and verify</strong></summary>
 
 Download: https://ollama.com/download/windows
 
@@ -91,12 +94,12 @@ ollama --version
 ollama serve
 ```
 
-Keep this running if you are not using `python main.py`.
+If you use `python main.py`, CHAKRA starts Ollama automatically.
 
 </details>
 
 <details>
-<summary><strong>Step 2 - Pull CHAKRA model</strong></summary>
+<summary><strong>Checkpoint 2 - Pull model</strong></summary>
 
 Default model in `config/settings.json` is `phi3:mini`.
 
@@ -108,34 +111,34 @@ ollama list
 </details>
 
 <details>
-<summary><strong>Step 3 - Install Python and Node.js</strong></summary>
+<summary><strong>Checkpoint 3 - Install core runtimes</strong></summary>
 
-Python: https://www.python.org/downloads/windows/
+Python:
 
 ```powershell
 python --version
 pip --version
 ```
 
-Node.js: https://nodejs.org/en/download
+Node.js:
 
 ```powershell
 node --version
 npm --version
 ```
 
-</details>
-
-<details>
-<summary><strong>Step 4 - Install PostgreSQL and create database</strong></summary>
-
-Download: https://www.postgresql.org/download/windows/
+PostgreSQL:
 
 ```powershell
 psql --version
 ```
 
-Create DB and user:
+</details>
+
+<details>
+<summary><strong>Checkpoint 4 - Create database and user</strong></summary>
+
+Run in psql as admin:
 
 ```sql
 CREATE USER chakra_user WITH PASSWORD 'your_strong_password_here';
@@ -146,7 +149,7 @@ GRANT ALL PRIVILEGES ON DATABASE chakra_db TO chakra_user;
 </details>
 
 <details>
-<summary><strong>Step 5 - Clone repo and install dependencies</strong></summary>
+<summary><strong>Checkpoint 5 - Clone and install dependencies</strong></summary>
 
 ```powershell
 git clone <your-github-repository-url>
@@ -158,13 +161,13 @@ python -m pip install --upgrade pip
 pip install fastapi uvicorn psutil psycopg2-binary ollama
 ```
 
-If PowerShell blocks activation:
+If activation is blocked:
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-Frontend deps:
+Frontend dependencies:
 
 ```powershell
 cd dashboard\frontend\chakra-ui
@@ -174,9 +177,9 @@ npm install
 </details>
 
 <details>
-<summary><strong>Step 6 - Configure project settings</strong></summary>
+<summary><strong>Checkpoint 6 - Configure settings.json</strong></summary>
 
-Edit `config/settings.json` and set:
+Edit `config/settings.json`:
 
 - `db_host`
 - `db_port`
@@ -205,7 +208,7 @@ Example:
 </details>
 
 <details>
-<summary><strong>Step 7 - Start backend and frontend</strong></summary>
+<summary><strong>Checkpoint 7 - Start CHAKRA stack</strong></summary>
 
 Backend only:
 
@@ -226,7 +229,7 @@ cd dashboard\frontend\chakra-ui
 npm start
 ```
 
-If backend is remote/custom:
+Override backend URL if needed:
 
 ```powershell
 $env:REACT_APP_API_BASE="http://localhost:8000"
@@ -235,40 +238,40 @@ npm start
 
 </details>
 
-## Start Backend and Frontend
+## Launch Sequence
 
-### Backend options
-
-- `python run.py` -> starts FastAPI backend on port 8000
-- `python main.py` -> starts Ollama serve and backend
-
-### Frontend
-
-```powershell
-cd dashboard\frontend\chakra-ui
-npm start
+```text
+[01] Init virtual environment
+[02] Install backend dependencies
+[03] Pull Ollama model
+[04] Start FastAPI backend
+[05] Start React frontend
+[06] Validate health endpoint
 ```
 
-App URL: http://localhost:3000
+Backend modes:
 
-## Health and Verification
+- `python run.py` -> backend only on port 8000
+- `python main.py` -> backend plus Ollama service
 
-Run:
+Frontend URL: http://localhost:3000
+
+## Health and Integrity Checks
 
 ```powershell
 Invoke-RestMethod http://localhost:8000/health
 ```
 
-Expect a JSON response containing `CHAKRA ONLINE`.
+Expected signal: JSON containing `CHAKRA ONLINE`
 
-Quick checks:
+Live checks:
 
-- Frontend opens at http://localhost:3000
-- Ollama is running and model exists
-- PostgreSQL credentials in `config/settings.json` are valid
-- Plugins page shows installed tools as ready
+- UI reachable at http://localhost:3000
+- Ollama service active and model present
+- PostgreSQL credentials match settings.json
+- Database tables auto-created on first backend boot
 
-## Optional Plugin Tool Validation
+## Plugin Arsenal Check
 
 ```powershell
 nmap --version
@@ -281,7 +284,7 @@ hydra -h
 
 If a tool is missing, install it and restart backend.
 
-## Project Structure
+## Project Topology
 
 - `main.py` starts Ollama and backend
 - `run.py` starts backend only
@@ -297,10 +300,10 @@ If a tool is missing, install it and restart backend.
 
 ## Troubleshooting
 
-- Chat not connecting: check `ollama serve` and model pull.
-- DB errors: verify PostgreSQL service and settings credentials.
-- Tools unavailable: install binaries and restart backend.
-- Frontend API issues: verify `REACT_APP_API_BASE` and backend port 8000.
+- Chat stuck/disconnected: verify `ollama serve` and model pull.
+- DB connection errors: check PostgreSQL service and `config/settings.json`.
+- Plugins show unavailable: install binaries and restart backend.
+- Frontend cannot reach backend: set `REACT_APP_API_BASE` and verify port 8000.
 
 ## License
 
