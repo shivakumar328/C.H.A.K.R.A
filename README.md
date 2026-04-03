@@ -1,7 +1,7 @@
 <h1 align="center">CHAKRA</h1>
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&height=180&text=CHAKRA%20v2.0&fontColor=00ff88&color=0:030b06,50:041810,100:062518&fontAlign=50&fontAlignY=35&desc=Cyber%20Heuristic%20Autonomous%20Kill-chain%20%26%20Recon%20Agent&descAlign=50&descAlignY=58" alt="CHAKRA Banner" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&amp;height=180&amp;text=CHAKRA%20v2.0&amp;fontColor=00ff88&amp;color=0:030b06,50:041810,100:062518&amp;fontAlign=50&amp;fontAlignY=35&amp;desc=Cyber%20Heuristic%20Autonomous%20Kill-chain%20%26%20Recon%20Agent&amp;descAlign=50&amp;descAlignY=58" alt="CHAKRA Banner" />
 </p>
 
 <p align="center">
