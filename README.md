@@ -1,131 +1,307 @@
+# CHAKRA
 
-# Predictive Analytics Framework for Proactive Cybercrime Intervention
+[![Platform](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white)](https://www.microsoft.com/windows)
+[![Backend](https://img.shields.io/badge/backend-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Frontend](https://img.shields.io/badge/frontend-React-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![LLM](https://img.shields.io/badge/LLM-Ollama-000000)](https://ollama.com/)
+[![DB](https://img.shields.io/badge/database-PostgreSQL-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
-![Cybersecurity Data Banner](https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif)
+CHAKRA is a cyber operations dashboard with a FastAPI backend, WebSocket streaming, a React frontend, recon and scan agents, defense monitoring, and a pluggable tool registry.
 
-An AI/ML-driven framework designed to forecast likely cash withdrawal locations from financial cybercrimes, enabling law enforcement agencies (LEAs) and financial institutions (FIs) to take timely and proactive intervention measures.
+This project is intended for authorized security work only. Use it only on systems you own or have written permission to assess.
 
-## 📜 Project Overview
+## Quick Navigation
 
-### The Problem
-The National Cybercrime Reporting Portal currently receives approximately **8,000 complaints daily**, a number that is rapidly increasing. This high volume overwhelms law enforcement and financial institutions, forcing them into a reactive posture where they act only after a crime has been successfully executed. This leads to delayed investigations and a lower probability of recovering stolen funds.
+- [One-Command Path](#one-command-path)
+- [Full Interactive Setup](#full-interactive-setup)
+- [Downloads](#downloads)
+- [Project Structure](#project-structure)
+- [Start Backend and Frontend](#start-backend-and-frontend)
+- [Health and Verification](#health-and-verification)
+- [Troubleshooting](#troubleshooting)
 
-### Our Solution
-This project shifts the paradigm from reactive to **proactive intervention**. By leveraging predictive analytics on historical cybercrime data, our framework forecasts potential cash withdrawal hotspots *in advance*. This provides LEAs with actionable intelligence to deploy resources strategically, alert local banks or ATMs in high-risk zones, and significantly improve the chances of preventing financial loss and apprehending criminals.
+## One-Command Path
 
-The framework is designed to integrate seamlessly with existing systems like the Citizen Financial Cyber Fraud Reporting and Management System, enhancing coordination between LEAs and FIs for faster fund blocking and recovery.
+If tools are already installed, use this fast path:
 
-***
+```powershell
+# from repo root
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install fastapi uvicorn psutil psycopg2-binary ollama
+ollama pull phi3:mini
+cd dashboard\frontend\chakra-ui
+npm install
+```
 
-## ✨ Key Deliverables
+Then start services in separate terminals:
 
-This framework is built upon four core components:
+```powershell
+# terminal 1 (repo root)
+python run.py
+```
 
-* **🧠 a. Predictive Analytics Engine:** An AI/ML-based system that analyzes historical cybercrime and financial data to predict potential withdrawal hotspots. Its features include advanced pattern detection, geospatial risk modeling, and the ability to generate real-time alerts.
+```powershell
+# terminal 2 (frontend)
+cd dashboard\frontend\chakra-ui
+npm start
+```
 
-* **🗺️ b. Risk Heatmap Dashboard:** A GIS-enabled dashboard that visualizes real-time and potential risk zones across the country. It provides interactive, drill-down filters by time, location, crime category, and other relevant parameters.
+## Downloads
 
-* **🛡️ c. Law Enforcement Interface:** A secure, access-controlled web interface for investigators and officers. It provides direct access to alerts, detailed intelligence reports, case data, and evidence documentation to support field operations.
+### Required
 
-* **🚨 d. Alert & Notification System:** A robust, multi-channel notification system that pushes real-time alerts to designated law enforcement personnel, banks, and I4C officers via SMS, email, API triggers, or direct dashboard notifications.
+- Git: https://git-scm.com/download/win
+- Python 3.10+: https://www.python.org/downloads/windows/
+- Node.js 18+: https://nodejs.org/en/download
+- PostgreSQL: https://www.postgresql.org/download/windows/
+- Ollama: https://ollama.com/download/windows
+- VS Code: https://code.visualstudio.com/Download
 
-***
+### Optional Security Tools
 
-## ⚙️ System Architecture
+- Nmap: https://nmap.org/download.html
+- Gobuster: https://github.com/OJ/gobuster/releases
+- SQLmap: https://sqlmap.org
+- Nikto: https://github.com/sullo/nikto
+- THC Hydra: https://github.com/vanhauser-thc/thc-hydra
+- TheHarvester: https://github.com/laramies/theHarvester
+- Whois: often easiest via WSL or package managers on Windows
 
-The framework operates on a multi-layered architecture designed for scalability, security, and real-time processing. Data flows from the National Cybercrime Reporting Portal, is processed by our predictive engine, and the resulting intelligence is disseminated through various user-facing components.
+## Full Interactive Setup
 
+Use the checklist below and expand each step as needed.
 
+- [ ] Step 1: Install Ollama and verify
+- [ ] Step 2: Pull model
+- [ ] Step 3: Install Python and Node.js
+- [ ] Step 4: Install PostgreSQL and create DB
+- [ ] Step 5: Clone repo and install dependencies
+- [ ] Step 6: Configure settings
+- [ ] Step 7: Start backend and frontend
 
-1.  **Data Ingestion:** Securely pulls anonymized, historical complaint data.
-2.  **Preprocessing & Feature Engineering:** Cleans data and extracts relevant features, including geospatial attributes.
-3.  **Predictive Modeling (AI/ML Core):** The engine runs trained models (e.g., Gradient Boosting, LSTMs) to generate risk scores and predict hotspot locations.
-4.  **Intelligence Storage:** Predictions and alerts are stored in a secure, high-performance database (e.g., PostgreSQL with PostGIS).
-5.  **Dissemination Layer:** An API serves the processed intelligence to the Heatmap Dashboard, LEA Interface, and the Alerting System.
+<details>
+<summary><strong>Step 1 - Install Ollama and verify</strong></summary>
 
-***
+Download: https://ollama.com/download/windows
 
-## 💻 Tech Stack
+```powershell
+ollama --version
+ollama serve
+```
 
-* **Backend & Machine Learning:** Python, Pandas, GeoPandas, Scikit-learn, TensorFlow/Keras
-* **Database:** PostgreSQL with PostGIS extension for geospatial queries
-* **API:** FastAPI / Django Rest Framework
-* **Frontend & Dashboard:** React.js, Deck.gl, Mapbox / Leaflet.js
-* **Alerting:** Twilio (for SMS), SendGrid (for Email), Celery & Redis (for asynchronous tasks)
+Keep this running if you are not using `python main.py`.
 
-***
+</details>
 
-## 🚀 Getting Started
+<details>
+<summary><strong>Step 2 - Pull CHAKRA model</strong></summary>
 
-To get a local copy up and running, follow these simple steps.
+Default model in `config/settings.json` is `phi3:mini`.
 
-### Prerequisites
-* Python 3.9+
-* Node.js and npm
-* PostgreSQL with PostGIS extension
+```powershell
+ollama pull phi3:mini
+ollama list
+```
 
-### Installation
+</details>
 
-1.  **Clone the repo:**
-    ```sh
-    git clone [https://github.com/shivakumar328/Cybercrime-Hotspot-Prediction.git](https://github.com/shivakumar328/Cybercrime-Hotspot-Prediction.git)
-    cd Cybercrime-Hotspot-Prediction
-    ```
+<details>
+<summary><strong>Step 3 - Install Python and Node.js</strong></summary>
 
-2.  **Setup Backend:**
-    ```sh
-    cd backend
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    pip install -r requirements.txt
-    ```
+Python: https://www.python.org/downloads/windows/
 
-3.  **Setup Frontend:**
-    ```sh
-    cd frontend
-    npm install
-    ```
+```powershell
+python --version
+pip --version
+```
 
-4.  **Configure Environment Variables:**
-    * Create a `.env` file in the `backend` directory and add your database credentials, API keys, etc.
+Node.js: https://nodejs.org/en/download
 
-***
+```powershell
+node --version
+npm --version
+```
 
-## 📖 Usage
+</details>
 
-1.  **Run the Backend Server:**
-    ```sh
-    cd backend
-    uvicorn main:app --reload
-    ```
+<details>
+<summary><strong>Step 4 - Install PostgreSQL and create database</strong></summary>
 
-2.  **Launch the Frontend Dashboard:**
-    ```sh
-    cd frontend
-    npm start
-    ```
+Download: https://www.postgresql.org/download/windows/
 
-3.  **Train the Predictive Model:**
-    * Place your dataset in the `/data` folder.
-    * Execute the training script:
-        ```sh
-        python scripts/train_model.py
-        ```
+```powershell
+psql --version
+```
 
-***
+Create DB and user:
 
-## 🤝 Contributing
+```sql
+CREATE USER chakra_user WITH PASSWORD 'your_strong_password_here';
+CREATE DATABASE chakra_db OWNER chakra_user;
+GRANT ALL PRIVILEGES ON DATABASE chakra_db TO chakra_user;
+```
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+</details>
 
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
+<details>
+<summary><strong>Step 5 - Clone repo and install dependencies</strong></summary>
 
-***
+```powershell
+git clone <your-github-repository-url>
+cd CHAKRA
 
-## 📄 License
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install fastapi uvicorn psutil psycopg2-binary ollama
+```
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+If PowerShell blocks activation:
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Frontend deps:
+
+```powershell
+cd dashboard\frontend\chakra-ui
+npm install
+```
+
+</details>
+
+<details>
+<summary><strong>Step 6 - Configure project settings</strong></summary>
+
+Edit `config/settings.json` and set:
+
+- `db_host`
+- `db_port`
+- `db_name`
+- `db_user`
+- `db_password`
+- `ollama_host`
+- `primary_model`
+- `fallback_model`
+
+Example:
+
+```json
+{
+  "db_host": "localhost",
+  "db_port": 5432,
+  "db_name": "chakra_db",
+  "db_user": "chakra_user",
+  "db_password": "your_strong_password_here",
+  "ollama_host": "http://localhost:11434",
+  "primary_model": "phi3:mini",
+  "fallback_model": "phi3:mini"
+}
+```
+
+</details>
+
+<details>
+<summary><strong>Step 7 - Start backend and frontend</strong></summary>
+
+Backend only:
+
+```powershell
+python run.py
+```
+
+Backend + Ollama together:
+
+```powershell
+python main.py
+```
+
+Frontend (new terminal):
+
+```powershell
+cd dashboard\frontend\chakra-ui
+npm start
+```
+
+If backend is remote/custom:
+
+```powershell
+$env:REACT_APP_API_BASE="http://localhost:8000"
+npm start
+```
+
+</details>
+
+## Start Backend and Frontend
+
+### Backend options
+
+- `python run.py` -> starts FastAPI backend on port 8000
+- `python main.py` -> starts Ollama serve and backend
+
+### Frontend
+
+```powershell
+cd dashboard\frontend\chakra-ui
+npm start
+```
+
+App URL: http://localhost:3000
+
+## Health and Verification
+
+Run:
+
+```powershell
+Invoke-RestMethod http://localhost:8000/health
+```
+
+Expect a JSON response containing `CHAKRA ONLINE`.
+
+Quick checks:
+
+- Frontend opens at http://localhost:3000
+- Ollama is running and model exists
+- PostgreSQL credentials in `config/settings.json` are valid
+- Plugins page shows installed tools as ready
+
+## Optional Plugin Tool Validation
+
+```powershell
+nmap --version
+whois --version
+gobuster --help
+sqlmap --version
+nikto -Version
+hydra -h
+```
+
+If a tool is missing, install it and restart backend.
+
+## Project Structure
+
+- `main.py` starts Ollama and backend
+- `run.py` starts backend only
+- `dashboard/backend/main.py` API and WebSocket routes
+- `dashboard/frontend/chakra-ui/` React dashboard
+- `agents/` recon, scan, defense logic
+- `core/` LLM engine, DB helpers, tool registry
+- `alerts/` toast and email alert integrations
+- `config/` runtime settings and scope
+- `data/` engagements, evidence, reports
+- `intelligence/` reference intelligence
+- `tools/tools.json` plugin/tool registry
+
+## Troubleshooting
+
+- Chat not connecting: check `ollama serve` and model pull.
+- DB errors: verify PostgreSQL service and settings credentials.
+- Tools unavailable: install binaries and restart backend.
+- Frontend API issues: verify `REACT_APP_API_BASE` and backend port 8000.
+
+## License
+
+MIT
